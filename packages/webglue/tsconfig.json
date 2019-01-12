@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "outDir": "./lib",
+    "target": "es5",
+    "module": "commonjs",
+    "lib": ["es2018"],
+    "allowJs": true,
+    // "declaration": true,
+    "removeComments": false,
+    "downlevelIteration": true,
+    "strict": true,
+    "moduleResolution": "node"
+  },
+  "exclude": [
+    "lib",
+    "node_modules"
+  ]
+}
