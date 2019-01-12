@@ -1,11 +1,16 @@
-export default function parseIndices(indices, attributes = null) {
+import { TypedArray } from '../type';
+
+export default function parseIndices(
+  indices: number[] | number[][] | TypedArray | any,
+  attributes: number[] | TypedArray | null = null,
+): TypedArray | any {
   if (Array.isArray(indices)) {
     let array = indices;
     if (Array.isArray(indices[0])) {
       // Flatten it.....
       array = [];
       // What the heck
-      indices.forEach(v => v.forEach(v2 => array.push(v2)));
+      indices.forEach((v: number[]) => v.forEach(v2 => array.push(v2)));
     }
     // Check indices boundary
     // TODO We need to split the indices if the device doesn't support

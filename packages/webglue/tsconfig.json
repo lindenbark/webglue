@@ -4,7 +4,7 @@
     "outDir": "./lib",
     "target": "es5",
     "module": "commonjs",
-    "lib": ["es2018"],
+    "lib": ["dom", "es2018"],
     "allowJs": true,
     // "declaration": true,
     "removeComments": false,

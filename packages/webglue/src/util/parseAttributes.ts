@@ -1,12 +1,16 @@
-export default function parseAttributes(attributes) {
-  let output = {};
+import { Attribute, DumbAttribute } from '../type';
+
+export default function parseAttributes(
+  attributes: { [key: string]: DumbAttribute },
+) {
+  let output: { [key: string]: Attribute } = {};
   for (let key in attributes) {
     output[key] = parseAttribute(attributes[key]);
   }
   return output;
 }
 
-export function parseAttribute(attribute) {
+export function parseAttribute(attribute: DumbAttribute): Attribute {
   if (Array.isArray(attribute)) {
     // Get vector axis size and attribute size
     let axis = attribute[0].length;
@@ -19,7 +23,7 @@ export function parseAttribute(attribute) {
       }
     });
     return {
-      axis, data: output
+      axis, data: output,
     };
   }
   // Assume normal object

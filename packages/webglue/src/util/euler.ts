@@ -1,8 +1,8 @@
-import { mat3 as Mat3, quat as Quat, vec3 } from 'gl-matrix';
+import { mat3 as Mat3, quat as Quat, vec3 as Vec3 } from 'gl-matrix';
 
 const MAT3_BUFFER = Mat3.create();
 
-export function quatToEuler(out, quat) {
+export function quatToEuler(out: Vec3, quat: Quat) {
   let mat = Mat3.fromQuat(MAT3_BUFFER, quat);
   let x, y, z;
   z = Math.asin(Math.min(1, Math.max(-1, mat[1])));
@@ -13,9 +13,9 @@ export function quatToEuler(out, quat) {
     x = 0;
     y = Math.atan2(mat[6], mat[8]);
   }
-  return vec3.set(out, x, y, z);
+  return Vec3.set(out, x, y, z);
 }
-export function eulerToQuat(out, euler) {
+export function eulerToQuat(out: Quat, euler: Vec3) {
   Quat.identity(out);
   Quat.rotateY(out, out, euler[1]);
   Quat.rotateZ(out, out, euler[2]);
