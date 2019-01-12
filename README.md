@@ -7,8 +7,6 @@ Minimal WebGL wrapper library
 git clone git@github.com:lindenbark/webglue.git
 cd webglue
 npm install
-npx lerna bootstrap
-npx lerna run --parallel build:lib
-npx lerna run --parallel dev
+npm run dev
 # open http://localhost:8080/
 ```
