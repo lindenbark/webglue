@@ -14,4 +14,5 @@ export type DumbAttribute = Attribute | number[][];
 
 export interface Geometry {
   attributes: { [key: string]: DumbAttribute };
+  indices: number[] | Uint16Array | Uint32Array;
 }

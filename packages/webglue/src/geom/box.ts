@@ -1,4 +1,4 @@
-import { Geometry } from './type';
+import { Geometry } from '../type';
 
 export default function box(): Geometry {
   return {

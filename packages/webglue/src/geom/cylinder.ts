@@ -1,4 +1,4 @@
-import { Geometry } from './type';
+import { Geometry } from '../type';
 
 export default function cylinder(polygons: number): Geometry {
   // A cylinder needs two bases and sides, and it's possible to make them

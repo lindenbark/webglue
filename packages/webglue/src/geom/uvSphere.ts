@@ -1,4 +1,4 @@
-import { Geometry } from './type';
+import { Geometry } from '../type';
 
 export default function uvSphere(segments: number, rings: number): Geometry {
   // A UV Sphere consists of many regular N-polygons, which serves as

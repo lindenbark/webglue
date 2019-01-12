@@ -1,4 +1,4 @@
-import { Geometry } from './type';
+import { Geometry } from '../type';
 
 // Uni-directional quad geometry used by post-processing scene.
 export default function quad(hSlice = 1, vSlice = 1): Geometry {

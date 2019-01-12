@@ -1,4 +1,4 @@
-import { Geometry } from './type';
+import { Geometry } from '../type';
 
 export default function cone(polygons: number): Geometry {
   // A cone needs a base and sides, and it's possible to make them
