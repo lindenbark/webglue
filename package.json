@@ -3,7 +3,10 @@
   "author": "Team Lindenbark",
   "license": "MIT",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "install": "lerna bootstrap && lerna run --parallel build:lib",
+    "dev": "lerna run --parallel dev"
+  },
   "devDependencies": {
     "lerna": "^3.10.5"
   }
