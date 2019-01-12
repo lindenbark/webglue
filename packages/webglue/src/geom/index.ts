@@ -1,5 +1,3 @@
-'create index';
-
 export { default as box } from './box';
 export { default as calcNormals } from './calcNormals';
 export { default as calcTangents } from './calcTangents';

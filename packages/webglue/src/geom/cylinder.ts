@@ -1,18 +1,20 @@
-export default function cylinder(polygons) {
+import { Geometry } from './type';
+
+export default function cylinder(polygons: number): Geometry {
   // A cylinder needs two bases and sides, and it's possible to make them
   // using base * 2 vertices. However, since OpenGL requires making seperate
   // vertices per different data (like normals), we need:
   // N * 2 vertices for the two bases, N * 4 vertices for sides.
-  let texCoords = new Float32Array(6 * polygons * 2);
-  let vertices = new Float32Array(6 * polygons * 3);
-  let normals = new Float32Array(6 * polygons * 3);
-  let indices = new Uint16Array(12 * polygons - 12);
+  const texCoords = new Float32Array(6 * polygons * 2);
+  const vertices = new Float32Array(6 * polygons * 3);
+  const normals = new Float32Array(6 * polygons * 3);
+  const indices = new Uint16Array(12 * polygons - 12);
   for (let i = 0; i < polygons; ++i) {
     // Cos / sin is useful for this.. I think?
-    let angle = i / polygons * Math.PI * 2;
-    let angleNext = (i + 1) / polygons * Math.PI * 2;
-    let angleUV = i / polygons;
-    let angleNextUV = (i + 1) / polygons;
+    const angle = (i / polygons) * Math.PI * 2;
+    const angleNext = ((i + 1) / polygons) * Math.PI * 2;
+    const angleUV = i / polygons;
+    const angleNextUV = (i + 1) / polygons;
     // Base
     vertices[i * 3] = Math.cos(angle);
     vertices[i * 3 + 1] = -1;
@@ -88,14 +90,14 @@ export default function cylinder(polygons) {
   }
   return {
     attributes: {
-      aPosition: {axis: 3, data: vertices},
-      aTexCoord: {axis: 2, data: texCoords},
+      aPosition: { axis: 3, data: vertices },
+      aTexCoord: { axis: 2, data: texCoords },
       // Instead of calculating normals by calculating indices, we can
       // just put vertices data to the normals to calculate smooth
       // normals. (This only applies to sphere though)
-      aNormal: {axis: 3, data: vertices}
+      aNormal: { axis: 3, data: vertices },
     },
-    indices
+    indices,
   };
   /*
   if (hardNormals) this.calculateNormals();
