@@ -5,6 +5,7 @@
   "main": "lib/",
   "scripts": {
     "dev": "run-p dev:**",
+    "dev:tsc": "tsc -w",
     "dev:prettier": "onchange '@(*.ts|@(src|types)/**/*.@(ts|tsx))' -- prettier --write {{changed}}",
     "build": "run-p build:**",
     "build:lib": "tsc"

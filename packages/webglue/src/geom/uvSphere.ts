@@ -1,4 +1,6 @@
-export default function uvSphere(segments, rings) {
+import { Geometry } from './type';
+
+export default function uvSphere(segments: number, rings: number): Geometry {
   // A UV Sphere consists of many regular N-polygons, which serves as
   // a 'ring'. Its radius gracefully goes small, and eventually reach 0
   // at the top. A sphere is defined as x^2 + y^2 + z^2 = 1. Which converts
@@ -18,18 +20,18 @@ export default function uvSphere(segments, rings) {
   // Floor is exactly same as the roof, it needs 3 * N vertices.
   // Adding all, it needs N * (6 + 4 * (M - 3)) vertices total, and
   // N * (2 + 2 * (M - 3)) triangles total.
-  let verticesTotal = segments * (6 + 4 * (rings - 3));
-  let facesTotal = segments * (2 + 2 * (rings - 3));
-  let texCoords = new Float32Array(verticesTotal * 2);
-  let vertices = new Float32Array(verticesTotal * 3);
-  let indices = new Uint16Array(facesTotal * 3);
+  const verticesTotal = segments * (6 + 4 * (rings - 3));
+  const facesTotal = segments * (2 + 2 * (rings - 3));
+  const texCoords = new Float32Array(verticesTotal * 2);
+  const vertices = new Float32Array(verticesTotal * 3);
+  const indices = new Uint16Array(facesTotal * 3);
   // Roof
   for (let i = 0; i < segments; ++i) {
-    let theta = 1 / (rings - 1) * Math.PI;
-    let y = Math.cos(theta);
-    let radius = Math.sin(theta);
-    let angle = i / segments * Math.PI * 2;
-    let angleNext = (i + 1) / segments * Math.PI * 2;
+    const theta = (1 / (rings - 1)) * Math.PI;
+    const y = Math.cos(theta);
+    const radius = Math.sin(theta);
+    const angle = (i / segments) * Math.PI * 2;
+    const angleNext = ((i + 1) / segments) * Math.PI * 2;
     // Roof left
     vertices[i * 9] = Math.cos(angle) * radius;
     vertices[i * 9 + 1] = y;
@@ -56,17 +58,17 @@ export default function uvSphere(segments, rings) {
   }
   // Pillar
   for (let j = 0; j < rings - 3; ++j) {
-    let theta = (j + 1) / (rings - 1) * Math.PI;
-    let y = Math.cos(theta);
-    let radius = Math.sin(theta);
-    let thetaNext = (j + 2) / (rings - 1) * Math.PI;
-    let yNext = Math.cos(thetaNext);
-    let radiusNext = Math.sin(thetaNext);
+    const theta = ((j + 1) / (rings - 1)) * Math.PI;
+    const y = Math.cos(theta);
+    const radius = Math.sin(theta);
+    const thetaNext = ((j + 2) / (rings - 1)) * Math.PI;
+    const yNext = Math.cos(thetaNext);
+    const radiusNext = Math.sin(thetaNext);
     for (let i = 0; i < segments; ++i) {
-      let startPos = segments * (3 + 4 * j) + i * 4;
-      let startIndices = segments * (3 + 6 * j) + i * 6;
-      let angle = i / segments * Math.PI * 2;
-      let angleNext = (i + 1) / segments * Math.PI * 2;
+      const startPos = segments * (3 + 4 * j) + i * 4;
+      const startIndices = segments * (3 + 6 * j) + i * 6;
+      const angle = (i / segments) * Math.PI * 2;
+      const angleNext = ((i + 1) / segments) * Math.PI * 2;
       // Roof left top
       vertices[startPos * 3] = Math.cos(angle) * radius;
       vertices[startPos * 3 + 1] = y;
@@ -103,13 +105,13 @@ export default function uvSphere(segments, rings) {
   }
   // Floor
   for (let i = 0; i < segments; ++i) {
-    let startPos = segments * (3 + 4 * (rings - 3)) + i * 3;
-    let startIndices = segments * (3 + 6 * (rings - 3)) + i * 3;
-    let theta = (rings - 2) / (rings - 1) * Math.PI;
-    let y = Math.cos(theta);
-    let radius = Math.sin(theta);
-    let angle = i / segments * Math.PI * 2;
-    let angleNext = (i + 1) / segments * Math.PI * 2;
+    const startPos = segments * (3 + 4 * (rings - 3)) + i * 3;
+    const startIndices = segments * (3 + 6 * (rings - 3)) + i * 3;
+    const theta = ((rings - 2) / (rings - 1)) * Math.PI;
+    const y = Math.cos(theta);
+    const radius = Math.sin(theta);
+    const angle = (i / segments) * Math.PI * 2;
+    const angleNext = ((i + 1) / segments) * Math.PI * 2;
     // Floor left
     vertices[startPos * 3] = Math.cos(angle) * radius;
     vertices[startPos * 3 + 1] = y;
@@ -136,13 +138,13 @@ export default function uvSphere(segments, rings) {
   }
   return {
     attributes: {
-      aPosition: {axis: 3, data: vertices},
-      aTexCoord: {axis: 2, data: texCoords},
+      aPosition: { axis: 3, data: vertices },
+      aTexCoord: { axis: 2, data: texCoords },
       // Instead of calculating normals by calculating indices, we can
       // just put vertices data to the normals to calculate smooth
       // normals. (This only applies to sphere though)
-      aNormal: {axis: 3, data: vertices}
+      aNormal: { axis: 3, data: vertices },
     },
-    indices
+    indices,
   };
 }
