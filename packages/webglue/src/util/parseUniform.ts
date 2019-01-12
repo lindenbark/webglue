@@ -10,7 +10,7 @@ let tmpMat4 = new Float32Array(16);
 export default function parseUniform(
   gl: WebGLRenderingContext,
   value: string | TypedArray | number[] | false,
-  type: GLenum,
+  type: GLenum
 ): TypedArray | number | false {
   if (typeof value === 'string') {
     if (type === gl.FLOAT_VEC3) {
@@ -41,39 +41,39 @@ export default function parseUniform(
   let i;
   if (Array.isArray(value)) {
     switch (type) {
-    case gl.FLOAT_VEC2:
-      tmpVec2[0] = value[0];
-      tmpVec2[1] = value[1];
-      return tmpVec2;
-    case gl.FLOAT_VEC3:
-      tmpVec3[0] = value[0];
-      tmpVec3[1] = value[1];
-      tmpVec3[2] = value[2];
-      return tmpVec3;
-    case gl.FLOAT_VEC4:
-      tmpVec4[0] = value[0];
-      tmpVec4[1] = value[1];
-      tmpVec4[2] = value[2];
-      tmpVec4[3] = value[3];
-      return tmpVec4;
-    case gl.FLOAT_MAT2:
-      for (i = 0; i < 4; ++i) tmpMat2[i] = value[i];
-      return tmpMat2;
-    case gl.FLOAT_MAT3:
-      for (i = 0; i < 9; ++i) tmpMat3[i] = value[i];
-      return tmpMat3;
-    case gl.FLOAT_MAT4:
-      for (i = 0; i < 16; ++i) tmpMat4[i] = value[i];
-      return tmpMat4;
-    case gl.INT_VEC2:
-    case gl.BOOL_VEC2:
-    case gl.INT_VEC3:
-    case gl.BOOL_VEC3:
-    case gl.INT_VEC4:
-    case gl.BOOL_VEC4:
-      return new Int32Array(value);
-    default:
-      throw new Error('Unhandled type ' + type);
+      case gl.FLOAT_VEC2:
+        tmpVec2[0] = value[0];
+        tmpVec2[1] = value[1];
+        return tmpVec2;
+      case gl.FLOAT_VEC3:
+        tmpVec3[0] = value[0];
+        tmpVec3[1] = value[1];
+        tmpVec3[2] = value[2];
+        return tmpVec3;
+      case gl.FLOAT_VEC4:
+        tmpVec4[0] = value[0];
+        tmpVec4[1] = value[1];
+        tmpVec4[2] = value[2];
+        tmpVec4[3] = value[3];
+        return tmpVec4;
+      case gl.FLOAT_MAT2:
+        for (i = 0; i < 4; ++i) tmpMat2[i] = value[i];
+        return tmpMat2;
+      case gl.FLOAT_MAT3:
+        for (i = 0; i < 9; ++i) tmpMat3[i] = value[i];
+        return tmpMat3;
+      case gl.FLOAT_MAT4:
+        for (i = 0; i < 16; ++i) tmpMat4[i] = value[i];
+        return tmpMat4;
+      case gl.INT_VEC2:
+      case gl.BOOL_VEC2:
+      case gl.INT_VEC3:
+      case gl.BOOL_VEC3:
+      case gl.INT_VEC4:
+      case gl.BOOL_VEC4:
+        return new Int32Array(value);
+      default:
+        throw new Error('Unhandled type ' + type);
     }
   }
   if (value === false) return getDefault(gl, type);
@@ -85,46 +85,63 @@ let defaultVec3 = new Float32Array(3);
 let defaultVec4 = new Float32Array(4);
 let defaultMat2 = new Float32Array([1, 0, 0, 1]);
 let defaultMat3 = new Float32Array([1, 0, 0, 0, 1, 0, 0, 0, 1]);
-let defaultMat4 = new Float32Array([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0,
-  0, 0, 0, 1]);
+let defaultMat4 = new Float32Array([
+  1,
+  0,
+  0,
+  0,
+  0,
+  1,
+  0,
+  0,
+  0,
+  0,
+  1,
+  0,
+  0,
+  0,
+  0,
+  1,
+]);
 
 export function getDefault(
-  gl: WebGLRenderingContext, type: GLenum,
+  gl: WebGLRenderingContext,
+  type: GLenum
 ): Float32Array | Int32Array | number | false {
   switch (type) {
-  case gl.FLOAT_VEC2:
-    return defaultVec2;
-  case gl.FLOAT_VEC3:
-    return defaultVec3;
-  case gl.FLOAT_VEC4:
-    return defaultVec4;
-  case gl.INT_VEC2:
-  case gl.BOOL_VEC2:
-    return new Int32Array([0, 0]);
-  case gl.INT_VEC3:
-  case gl.BOOL_VEC3:
-    return new Int32Array([0, 0, 0]);
-  case gl.INT_VEC4:
-  case gl.BOOL_VEC4:
-    return new Int32Array([0, 0, 0, 0]);
-  case gl.BOOL:
-  case gl.BYTE:
-  case gl.UNSIGNED_BYTE:
-  case gl.SHORT:
-  case gl.UNSIGNED_SHORT:
-  case gl.INT:
-  case gl.UNSIGNED_INT:
-  case gl.FLOAT:
-    return 0;
-  case gl.FLOAT_MAT2:
-    return defaultMat2;
-  case gl.FLOAT_MAT3:
-    return defaultMat3;
-  case gl.FLOAT_MAT4:
-    return defaultMat4;
-  case gl.SAMPLER_2D:
-  case gl.SAMPLER_CUBE:
-  default:
-    return false;
+    case gl.FLOAT_VEC2:
+      return defaultVec2;
+    case gl.FLOAT_VEC3:
+      return defaultVec3;
+    case gl.FLOAT_VEC4:
+      return defaultVec4;
+    case gl.INT_VEC2:
+    case gl.BOOL_VEC2:
+      return new Int32Array([0, 0]);
+    case gl.INT_VEC3:
+    case gl.BOOL_VEC3:
+      return new Int32Array([0, 0, 0]);
+    case gl.INT_VEC4:
+    case gl.BOOL_VEC4:
+      return new Int32Array([0, 0, 0, 0]);
+    case gl.BOOL:
+    case gl.BYTE:
+    case gl.UNSIGNED_BYTE:
+    case gl.SHORT:
+    case gl.UNSIGNED_SHORT:
+    case gl.INT:
+    case gl.UNSIGNED_INT:
+    case gl.FLOAT:
+      return 0;
+    case gl.FLOAT_MAT2:
+      return defaultMat2;
+    case gl.FLOAT_MAT3:
+      return defaultMat3;
+    case gl.FLOAT_MAT4:
+      return defaultMat4;
+    case gl.SAMPLER_2D:
+    case gl.SAMPLER_CUBE:
+    default:
+      return false;
   }
 }

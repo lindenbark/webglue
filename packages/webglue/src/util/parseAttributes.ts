@@ -1,8 +1,8 @@
 import { Attribute, DumbAttribute } from '../type';
 
-export default function parseAttributes(
-  attributes: { [key: string]: DumbAttribute },
-) {
+export default function parseAttributes(attributes: {
+  [key: string]: DumbAttribute;
+}) {
   let output: { [key: string]: Attribute } = {};
   for (let key in attributes) {
     output[key] = parseAttribute(attributes[key]);
@@ -19,11 +19,12 @@ export function parseAttribute(attribute: DumbAttribute): Attribute {
     attribute.forEach(v => {
       for (let i = 0; i < axis; ++i) {
         output[ptr] = v[i];
-        ptr ++;
+        ptr++;
       }
     });
     return {
-      axis, data: output,
+      axis,
+      data: output,
     };
   }
   // Assume normal object

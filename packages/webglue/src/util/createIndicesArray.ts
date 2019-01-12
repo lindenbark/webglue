@@ -1,5 +1,6 @@
 export default function createIndicesArray(
-  vertices: number, indices: number[],
+  vertices: number,
+  indices: number[]
 ): Uint8Array | Uint16Array | Uint32Array {
   if (vertices <= 256) {
     return new Uint8Array(indices);

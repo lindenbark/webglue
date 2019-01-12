@@ -2,7 +2,8 @@ import { Geometry, DumbAttribute } from '../type';
 import { parseAttribute } from './parseAttributes';
 // Gets the AABB for selected geometry.
 export default function getAABB(
-  geom: Geometry, attribName: string = 'aPosition',
+  geom: Geometry,
+  attribName: string = 'aPosition'
 ): Float32Array {
   let attribute = parseAttribute(geom.attributes[attribName]);
   // We don't have to check indices as long as all attributes are being used.

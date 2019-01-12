@@ -2,7 +2,7 @@ import { TypedArray } from '../type';
 
 export default function parseIndices(
   indices: number[] | number[][] | TypedArray | any,
-  attributes: number[] | TypedArray | null = null,
+  attributes: number[] | TypedArray | null = null
 ): TypedArray | any {
   if (Array.isArray(indices)) {
     let array = indices;
@@ -26,9 +26,12 @@ export default function parseIndices(
       if (v >= 256 && bits < 16) bits = 16;
     });
     switch (bits) {
-    case 8: return new Uint8Array(array);
-    case 16: return new Uint16Array(array);
-    case 32: return new Uint32Array(array);
+      case 8:
+        return new Uint8Array(array);
+      case 16:
+        return new Uint16Array(array);
+      case 32:
+        return new Uint32Array(array);
     }
   }
   return indices;
