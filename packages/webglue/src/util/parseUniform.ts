@@ -1,3 +1,5 @@
+import { TypedArray } from '../type';
+
 let tmpVec2 = new Float32Array(2);
 let tmpVec3 = new Float32Array(3);
 let tmpVec4 = new Float32Array(4);
@@ -5,28 +7,35 @@ let tmpMat2 = new Float32Array(4);
 let tmpMat3 = new Float32Array(9);
 let tmpMat4 = new Float32Array(16);
 
-export default function parseUniform(gl, value, type) {
-  if (typeof value === 'string' && type === gl.FLOAT_VEC3) {
-    tmpVec3[0] = parseInt(value.slice(1, 3), 16) / 255;
-    tmpVec3[1] = parseInt(value.slice(3, 5), 16) / 255;
-    tmpVec3[2] = parseInt(value.slice(5, 7), 16) / 255;
-    return tmpVec3;
-  }
-  if (typeof value === 'string' && type === gl.FLOAT_VEC4) {
-    if (value.length > 7) {
-      // ARGB
-      tmpVec4[0] = parseInt(value.slice(3, 5), 16) / 255;
-      tmpVec4[1] = parseInt(value.slice(5, 7), 16) / 255;
-      tmpVec4[2] = parseInt(value.slice(7, 9), 16) / 255;
-      tmpVec4[3] = parseInt(value.slice(1, 3), 16) / 255;
-      return tmpVec4;
+export default function parseUniform(
+  gl: WebGLRenderingContext,
+  value: string | TypedArray | number[] | false,
+  type: GLenum,
+): TypedArray | number | false {
+  if (typeof value === 'string') {
+    if (type === gl.FLOAT_VEC3) {
+      tmpVec3[0] = parseInt(value.slice(1, 3), 16) / 255;
+      tmpVec3[1] = parseInt(value.slice(3, 5), 16) / 255;
+      tmpVec3[2] = parseInt(value.slice(5, 7), 16) / 255;
+      return tmpVec3;
+    } else if (type === gl.FLOAT_VEC4) {
+      if (value.length > 7) {
+        // ARGB
+        tmpVec4[0] = parseInt(value.slice(3, 5), 16) / 255;
+        tmpVec4[1] = parseInt(value.slice(5, 7), 16) / 255;
+        tmpVec4[2] = parseInt(value.slice(7, 9), 16) / 255;
+        tmpVec4[3] = parseInt(value.slice(1, 3), 16) / 255;
+        return tmpVec4;
+      } else {
+        // RGB
+        tmpVec4[0] = parseInt(value.slice(1, 3), 16) / 255;
+        tmpVec4[1] = parseInt(value.slice(3, 5), 16) / 255;
+        tmpVec4[2] = parseInt(value.slice(5, 7), 16) / 255;
+        tmpVec4[3] = 1;
+        return tmpVec4;
+      }
     } else {
-      // RGB
-      tmpVec4[0] = parseInt(value.slice(1, 3), 16) / 255;
-      tmpVec4[1] = parseInt(value.slice(3, 5), 16) / 255;
-      tmpVec4[2] = parseInt(value.slice(5, 7), 16) / 255;
-      tmpVec4[3] = 1;
-      return tmpVec4;
+      throw new Error('Invalid usage of string in uniform');
     }
   }
   let i;
@@ -63,6 +72,8 @@ export default function parseUniform(gl, value, type) {
     case gl.INT_VEC4:
     case gl.BOOL_VEC4:
       return new Int32Array(value);
+    default:
+      throw new Error('Unhandled type ' + type);
     }
   }
   if (value === false) return getDefault(gl, type);
@@ -77,7 +88,9 @@ let defaultMat3 = new Float32Array([1, 0, 0, 0, 1, 0, 0, 0, 1]);
 let defaultMat4 = new Float32Array([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0,
   0, 0, 0, 1]);
 
-export function getDefault(gl, type) {
+export function getDefault(
+  gl: WebGLRenderingContext, type: GLenum,
+): Float32Array | Int32Array | number | false {
   switch (type) {
   case gl.FLOAT_VEC2:
     return defaultVec2;
@@ -111,6 +124,7 @@ export function getDefault(gl, type) {
     return defaultMat4;
   case gl.SAMPLER_2D:
   case gl.SAMPLER_CUBE:
+  default:
     return false;
   }
 }

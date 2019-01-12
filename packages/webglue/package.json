@@ -15,6 +15,7 @@
     "gl-matrix": "^3.0.0"
   },
   "devDependencies": {
+    "@types/gl-matrix": "^2.4.4",
     "eslint": "^5.12.0",
     "typescript": "^3.2.2"
   }

@@ -1,4 +1,4 @@
-export default function attachAppendage(code, appendage) {
+export default function attachAppendage(code: string, appendage: string) {
   // Find #version and skip it.
   let versionPos = code.indexOf('#version');
   let newLinePos = code.indexOf('\n', versionPos);
