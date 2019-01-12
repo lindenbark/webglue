@@ -1,59 +1,47 @@
-import boxGeom from 'webglue/geom/box';
-import uvSphereGeom from 'webglue/geom/uvSphere';
-import transformGeom from 'webglue/geom/transform';
-import combineGeom from 'webglue/geom/combine';
-import calcNormals from 'webglue/geom/calcNormals';
+import cylinderGeom from 'webglue/lib/geom/cylinder';
 
 import { mat3, mat4 } from 'gl-matrix';
 
-export default function combine(renderer) {
+export default function cylinder(renderer) {
   const gl = renderer.gl;
-  let geom = renderer.geometries.create(
-    combineGeom([calcNormals(boxGeom()),
-      transformGeom(uvSphereGeom(32, 16), {
-        aPosition: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1]
-      })
-    ])
-  );
+  let box = renderer.geometries.create(cylinderGeom(16));
   let shader = renderer.shaders.create(
     require('../shader/phong.vert'),
     require('../shader/phong.frag')
   );
-  let texture = renderer.textures.create(require('../texture/2.png'), {
-    params: {
-      wrapS: gl.REPEAT,
-      wrapT: gl.REPEAT
-    }
-  });
+  let texture = renderer.textures.create(require('../texture/2.png'));
 
   let model1Mat = mat4.create();
   let model1Normal = mat3.create();
 
   return (delta, context) => {
+    mat4.rotateX(model1Mat, model1Mat, Math.PI * delta / 1000 / 2);
+    mat3.normalFromMat4(model1Normal, model1Mat);
+
     renderer.render({
       options: {
         clearColor: new Float32Array([0, 0, 0, 1]),
         clearDepth: 1,
-        cull: gl.BACK,
+        // cull: gl.BACK,
         depth: gl.LEQUAL
       },
       uniforms: Object.assign({}, context.camera, {
         uPointLight: [{
-          position: [0, -8, 3],
+          position: [0, 0, 10],
           color: '#ffffff',
-          intensity: [0.3, 0.7, 1.0, 0.00015]
+          intensity: [0.3, 0.7, 0.5, 0.00015]
         }]
       }),
       passes: [{
         shader: shader,
-        geometry: geom,
+        geometry: box,
         uniforms: {
           uModel: model1Mat,
           uNormal: model1Normal,
           uMaterial: {
             ambient: '#ffffff',
             diffuse: '#ffffff',
-            specular: '#111111',
+            specular: '#555555',
             shininess: 30
           },
           uDiffuseMap: texture

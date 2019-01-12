@@ -1,7 +1,7 @@
-import boxGeom from 'webglue/geom/box';
-import calcNormals from 'webglue/geom/calcNormals';
+import boxGeom from 'webglue/lib/geom/box';
+import calcNormals from 'webglue/lib/geom/calcNormals';
 
-import MeshTransform from 'webglue/meshTransform';
+import MeshTransform from 'webglue/lib/meshTransform';
 
 export default function hello(renderer) {
   const gl = renderer.gl;

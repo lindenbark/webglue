@@ -1,8 +1,8 @@
-import calcNormals from 'webglue/geom/calcNormals';
-import calcTangents from 'webglue/geom/calcTangents';
-import quadGeom from 'webglue/geom/quad';
+import calcNormals from 'webglue/lib/geom/calcNormals';
+import calcTangents from 'webglue/lib/geom/calcTangents';
+import quadGeom from 'webglue/lib/geom/quad';
 
-import Filter from 'webglue/filter';
+import Filter from 'webglue/lib/filter';
 
 import { mat3, mat4 } from 'gl-matrix';
 

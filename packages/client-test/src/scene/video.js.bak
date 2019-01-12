@@ -1,5 +1,5 @@
-import boxGeom from 'webglue/geom/box';
-import calcNormals from 'webglue/geom/calcNormals';
+import boxGeom from 'webglue/lib/geom/box';
+import calcNormals from 'webglue/lib/geom/calcNormals';
 
 import { mat3, mat4 } from 'gl-matrix';
 

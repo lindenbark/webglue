@@ -1,0 +1,25 @@
+{
+  "name": "webglue",
+  "version": "1.0.15",
+  "description": "Minimal WebGL wrapper library",
+  "main": "lib/",
+  "scripts": {
+    "start": "webpack-dev-server --hot --inline",
+    "test": "npm run lint",
+    "lint": "eslint src/",
+    "build": "babel src -d lib --copy-files"
+  },
+  "author": "Kkiro",
+  "license": "MIT",
+  "dependencies": {
+    "gl-matrix": "^3.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "eslint": "^5.12.0"
+  }
+}

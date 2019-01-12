@@ -1,9 +1,9 @@
-import loadOBJ from 'webglue/loader/obj';
-import channelGeom from 'webglue/geom/channel';
-import calcNormals from 'webglue/geom/calcNormals';
-import transformGeom from 'webglue/geom/transform';
-import boxGeom from 'webglue/geom/box';
-import quadGeom from 'webglue/geom/quad';
+import loadOBJ from 'webglue/lib/loader/obj';
+import channelGeom from 'webglue/lib/geom/channel';
+import calcNormals from 'webglue/lib/geom/calcNormals';
+import transformGeom from 'webglue/lib/geom/transform';
+import boxGeom from 'webglue/lib/geom/box';
+import quadGeom from 'webglue/lib/geom/quad';
 
 import { mat3, mat4 } from 'gl-matrix';
 

@@ -1,5 +1,5 @@
-import uvSphereGeom from 'webglue/geom/uvSphere';
-import wireframeGeom from 'webglue/geom/wireframe';
+import uvSphereGeom from 'webglue/lib/geom/uvSphere';
+import wireframeGeom from 'webglue/lib/geom/wireframe';
 
 import { mat4 } from 'gl-matrix';
 

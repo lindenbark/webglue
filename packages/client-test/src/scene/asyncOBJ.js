@@ -1,8 +1,8 @@
-import loadOBJ from 'webglue/loader/obj';
-import channelGeom from 'webglue/geom/channel/channelOld';
-import boxGeom from 'webglue/geom/box';
-import calcNormals from 'webglue/geom/calcNormals';
-import onLoad from 'webglue/util/onLoad';
+import loadOBJ from 'webglue/lib/loader/obj';
+import channelGeom from 'webglue/lib/geom/channel/channelOld';
+import boxGeom from 'webglue/lib/geom/box';
+import calcNormals from 'webglue/lib/geom/calcNormals';
+import onLoad from 'webglue/lib/util/onLoad';
 
 import { mat3, mat4 } from 'gl-matrix';
 

@@ -7,17 +7,12 @@ module.exports = {
   mode: 'development',
   entry: [
     'babel-polyfill',
-    './client-test/client.js',
+    './src/client.js',
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
     sourceMapFilename: '[name].map',
-  },
-  resolve: {
-    alias: {
-      webglue: path.join(__dirname, 'src')
-    }
   },
   // devtool: 'source-map',
   plugins: [

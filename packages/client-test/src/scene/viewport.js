@@ -1,5 +1,5 @@
-import boxGeom from 'webglue/geom/box';
-import quadGeom from 'webglue/geom/quad';
+import boxGeom from 'webglue/lib/geom/box';
+import quadGeom from 'webglue/lib/geom/quad';
 
 function lerp(min, max, val) {
   return min + (max - min) * val;

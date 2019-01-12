@@ -1,10 +1,29 @@
-import cylinderGeom from 'webglue/geom/cylinder';
+import boxGeom from 'webglue/lib/geom/box';
+import calcNormals from 'webglue/lib/geom/calcNormals';
 
 import { mat3, mat4 } from 'gl-matrix';
 
-export default function cylinder(renderer) {
+export default function instanced(renderer) {
   const gl = renderer.gl;
-  let box = renderer.geometries.create(cylinderGeom(16));
+  let box = calcNormals(boxGeom());
+  function range(v) {
+    let out = [];
+    for (let i = 0; i < v; ++i) out.push(i);
+    return out;
+  }
+
+  // Test instancing data...
+  let boxes = renderer.geometries.create(Object.assign({}, box, {
+    attributes: Object.assign({}, box.attributes, {
+      aInstPos: range(100).map(() => [
+        Math.random() * 50 - 25, Math.random() * 50 - 25,
+        Math.random() * 50 - 25
+      ])
+    }),
+    instanced: {
+      aInstPos: 1
+    }
+  }));
   let shader = renderer.shaders.create(
     require('../shader/phong.vert'),
     require('../shader/phong.frag')
@@ -15,26 +34,23 @@ export default function cylinder(renderer) {
   let model1Normal = mat3.create();
 
   return (delta, context) => {
-    mat4.rotateX(model1Mat, model1Mat, Math.PI * delta / 1000 / 2);
-    mat3.normalFromMat4(model1Normal, model1Mat);
-
     renderer.render({
       options: {
         clearColor: new Float32Array([0, 0, 0, 1]),
         clearDepth: 1,
-        // cull: gl.BACK,
+        cull: gl.BACK,
         depth: gl.LEQUAL
       },
       uniforms: Object.assign({}, context.camera, {
         uPointLight: [{
-          position: [0, 0, 10],
+          position: [0, -3, 0],
           color: '#ffffff',
           intensity: [0.3, 0.7, 0.5, 0.00015]
         }]
       }),
       passes: [{
         shader: shader,
-        geometry: box,
+        geometry: boxes,
         uniforms: {
           uModel: model1Mat,
           uNormal: model1Normal,

@@ -1,5 +1,5 @@
-import quadGeom from 'webglue/geom/quad';
-import calcNormals from 'webglue/geom/calcNormals';
+import quadGeom from 'webglue/lib/geom/quad';
+import calcNormals from 'webglue/lib/geom/calcNormals';
 
 import { mat3, mat4 } from 'gl-matrix';
 

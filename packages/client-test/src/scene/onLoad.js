@@ -1,7 +1,7 @@
-import quadGeom from 'webglue/geom/quad';
-import boxGeom from 'webglue/geom/box';
-import calcNormals from 'webglue/geom/calcNormals';
-import loadWait from 'webglue/util/onLoad';
+import quadGeom from 'webglue/lib/geom/quad';
+import boxGeom from 'webglue/lib/geom/box';
+import calcNormals from 'webglue/lib/geom/calcNormals';
+import loadWait from 'webglue/lib/util/onLoad';
 
 import { mat3, mat4 } from 'gl-matrix';
 
