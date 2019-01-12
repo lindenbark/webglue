@@ -5,3 +5,9 @@ export interface Attribute {
   axis: number,
   data: number[] | TypedArray,
 };
+
+export type DumbAttribute = Attribute | number[][];
+
+export interface Geometry {
+  attributes: { [key: string]: DumbAttribute },
+}

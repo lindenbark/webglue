@@ -1,7 +1,7 @@
-import { Attribute } from '../type';
+import { Attribute, DumbAttribute } from '../type';
 
 export default function parseAttributes(
-  attributes: { [key: string]: Attribute | number[][] },
+  attributes: { [key: string]: DumbAttribute },
 ) {
   let output: { [key: string]: Attribute } = {};
   for (let key in attributes) {
@@ -10,7 +10,7 @@ export default function parseAttributes(
   return output;
 }
 
-export function parseAttribute(attribute: Attribute | number[][]): Attribute {
+export function parseAttribute(attribute: DumbAttribute): Attribute {
   if (Array.isArray(attribute)) {
     // Get vector axis size and attribute size
     let axis = attribute[0].length;
