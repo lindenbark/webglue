@@ -1,34 +1,30 @@
-import boxGeom from 'webglue/geom/box';
-import calcNormals from 'webglue/geom/calcNormals';
+import boxGeom from 'webglue/lib/geom/box';
+import uvSphereGeom from 'webglue/lib/geom/uvSphere';
+import transformGeom from 'webglue/lib/geom/transform';
+import combineGeom from 'webglue/lib/geom/combine';
+import calcNormals from 'webglue/lib/geom/calcNormals';
 
 import { mat3, mat4 } from 'gl-matrix';
 
-export default function instanced(renderer) {
+export default function combine(renderer) {
   const gl = renderer.gl;
-  let box = calcNormals(boxGeom());
-  function range(v) {
-    let out = [];
-    for (let i = 0; i < v; ++i) out.push(i);
-    return out;
-  }
-
-  // Test instancing data...
-  let boxes = renderer.geometries.create(Object.assign({}, box, {
-    attributes: Object.assign({}, box.attributes, {
-      aInstPos: range(100).map(() => [
-        Math.random() * 50 - 25, Math.random() * 50 - 25,
-        Math.random() * 50 - 25
-      ])
-    }),
-    instanced: {
-      aInstPos: 1
-    }
-  }));
+  let geom = renderer.geometries.create(
+    combineGeom([calcNormals(boxGeom()),
+      transformGeom(uvSphereGeom(32, 16), {
+        aPosition: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1]
+      })
+    ])
+  );
   let shader = renderer.shaders.create(
     require('../shader/phong.vert'),
     require('../shader/phong.frag')
   );
-  let texture = renderer.textures.create(require('../texture/2.png'));
+  let texture = renderer.textures.create(require('../texture/2.png'), {
+    params: {
+      wrapS: gl.REPEAT,
+      wrapT: gl.REPEAT
+    }
+  });
 
   let model1Mat = mat4.create();
   let model1Normal = mat3.create();
@@ -43,21 +39,21 @@ export default function instanced(renderer) {
       },
       uniforms: Object.assign({}, context.camera, {
         uPointLight: [{
-          position: [0, -3, 0],
+          position: [0, -8, 3],
           color: '#ffffff',
-          intensity: [0.3, 0.7, 0.5, 0.00015]
+          intensity: [0.3, 0.7, 1.0, 0.00015]
         }]
       }),
       passes: [{
         shader: shader,
-        geometry: boxes,
+        geometry: geom,
         uniforms: {
           uModel: model1Mat,
           uNormal: model1Normal,
           uMaterial: {
             ambient: '#ffffff',
             diffuse: '#ffffff',
-            specular: '#555555',
+            specular: '#111111',
             shininess: 30
           },
           uDiffuseMap: texture

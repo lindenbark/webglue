@@ -1,37 +1,10 @@
 {
   "name": "webglue",
-  "version": "1.0.15",
-  "description": "Minimal WebGL wrapper library",
-  "main": "lib/",
-  "scripts": {
-    "start": "webpack-dev-server --hot --inline",
-    "test": "npm run lint",
-    "lint": "eslint src/",
-    "build": "webpack --config=webpack.config.js --progress --profile --colors && babel src -d lib --copy-files"
-  },
-  "author": "Kkiro",
+  "author": "Team Lindenbark",
   "license": "MIT",
+  "private": true,
+  "scripts": {},
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-loader": "^8.0.5",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-register": "^6.26.0",
-    "css-loader": "^2.1.0",
-    "eslint": "^5.12.0",
-    "file-loader": "^3.0.1",
-    "html-loader": "^0.5.5",
-    "html-webpack-plugin": "^3.2.0",
-    "import-glob-loader": "^1.1.0",
-    "json-loader": "^0.5.7",
-    "raw-loader": "^1.0.0",
-    "style-loader": "^0.23.1",
-    "url-loader": "^1.1.2",
-    "webpack": "^4.28.4",
-    "webpack-cli": "^3.2.1",
-    "webpack-dev-server": "^3.1.14"
-  },
-  "dependencies": {
-    "gl-matrix": "^3.0.0"
+    "lerna": "^3.10.5"
   }
 }

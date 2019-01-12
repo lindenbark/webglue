@@ -1,16 +1,16 @@
-import loadOBJ from 'webglue/loader/obj';
-import channelGeom from 'webglue/geom/channel';
-import calcNormals from 'webglue/geom/calcNormals';
-import calcTangents from 'webglue/geom/calcTangents';
-import transformGeom from 'webglue/geom/transform';
-import boxGeom from 'webglue/geom/box';
-import quadGeom from 'webglue/geom/quad';
+import loadOBJ from 'webglue/lib/loader/obj';
+import channelGeom from 'webglue/lib/geom/channel';
+import calcNormals from 'webglue/lib/geom/calcNormals';
+import calcTangents from 'webglue/lib/geom/calcTangents';
+import transformGeom from 'webglue/lib/geom/transform';
+import boxGeom from 'webglue/lib/geom/box';
+import quadGeom from 'webglue/lib/geom/quad';
 
 import { vec3 } from 'gl-matrix';
 
-import Camera, { orthogonal } from 'webglue/camera';
-import Filter from 'webglue/filter';
-import MeshTransform from 'webglue/meshTransform';
+import Camera, { orthogonal } from 'webglue/lib/camera';
+import Filter from 'webglue/lib/filter';
+import MeshTransform from 'webglue/lib/meshTransform';
 
 function createShaderHandler(frag) {
   let shaders = new Map();

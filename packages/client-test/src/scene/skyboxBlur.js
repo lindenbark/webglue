@@ -1,8 +1,8 @@
-import calcNormals from 'webglue/geom/calcNormals';
-import calcTangents from 'webglue/geom/calcTangents';
-import boxGeom from 'webglue/geom/box';
+import calcNormals from 'webglue/lib/geom/calcNormals';
+import calcTangents from 'webglue/lib/geom/calcTangents';
+import boxGeom from 'webglue/lib/geom/box';
 
-import onLoad from 'webglue/util/onLoad';
+import onLoad from 'webglue/lib/util/onLoad';
 
 import { mat3, mat4 } from 'gl-matrix';
 

@@ -1,7 +1,7 @@
-import translateWidget from 'webglue/geom/translateWidget';
-import scaleWidget from 'webglue/geom/scaleWidget';
-import rotateWidget from 'webglue/geom/rotateWidget';
-import Transform from 'webglue/transform';
+import translateWidget from 'webglue/lib/geom/translateWidget';
+import scaleWidget from 'webglue/lib/geom/scaleWidget';
+import rotateWidget from 'webglue/lib/geom/rotateWidget';
+import Transform from 'webglue/lib/transform';
 
 export default function widget(renderer) {
   const gl = renderer.gl;

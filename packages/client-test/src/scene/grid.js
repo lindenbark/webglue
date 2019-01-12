@@ -1,4 +1,4 @@
-import gridGeom from 'webglue/geom/grid';
+import gridGeom from 'webglue/lib/geom/grid';
 import { mat3, mat4 } from 'gl-matrix';
 
 export default function grid(renderer) {

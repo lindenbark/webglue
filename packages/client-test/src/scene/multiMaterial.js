@@ -1,8 +1,8 @@
-import loadOBJ from 'webglue/loader/obj';
-import loadMTL from 'webglue/loader/mtl';
-import channelGeom from 'webglue/geom/channel';
-import boxGeom from 'webglue/geom/box';
-import bakeMesh from 'webglue/util/bakeMesh';
+import loadOBJ from 'webglue/lib/loader/obj';
+import loadMTL from 'webglue/lib/loader/mtl';
+import channelGeom from 'webglue/lib/geom/channel';
+import boxGeom from 'webglue/lib/geom/box';
+import bakeMesh from 'webglue/lib/util/bakeMesh';
 
 import { mat3, mat4 } from 'gl-matrix';
 

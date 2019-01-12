@@ -1,6 +1,6 @@
-import loadOBJ from 'webglue/loader/obj';
-import channelGeom from 'webglue/geom/channel';
-import boxGeom from 'webglue/geom/box';
+import loadOBJ from 'webglue/lib/loader/obj';
+import channelGeom from 'webglue/lib/geom/channel';
+import boxGeom from 'webglue/lib/geom/box';
 
 import { mat3, mat4, vec3 } from 'gl-matrix';
 

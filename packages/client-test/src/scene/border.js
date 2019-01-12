@@ -1,6 +1,6 @@
-import loadOBJ from 'webglue/loader/obj';
-import channelGeom from 'webglue/geom/channel';
-import MeshTransform from 'webglue/meshTransform';
+import loadOBJ from 'webglue/lib/loader/obj';
+import channelGeom from 'webglue/lib/geom/channel';
+import MeshTransform from 'webglue/lib/meshTransform';
 
 export default function border(renderer) {
   const gl = renderer.gl;
